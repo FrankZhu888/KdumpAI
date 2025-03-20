@@ -17,39 +17,60 @@ The tool collects critical system data using the `crash` utility, including syst
 - **RHEL Compatibility**: Supports Red Hat Enterprise Linux 8 and 9.
 
 ## Prerequisites
+- Python 3+
+- `crash` utility, automatically installed if not present
+- `kernel-debuginfo` (install via `debuginfo-install kernel`)
+- Root privileges for execution
+- AI API, Azure OpenAI or DeepSeek
 
-- **Operating System**: RHEL 8 or RHEL 9.
-- **Python**: Version 3.6 or higher.
-- **Crash Utility**: Automatically installed if not present (requires root privileges).
-- **AI API**: Azure OpenAI or DeepSeek  
+## Installation
 
-AI API Access: An API key and endpoint for either Azure OpenAI or DeepSeek.
+`$ git clone https://github.com/<your-username>/KdumpAI.git`
 
-Installation
+`$ cd KdumpAI`
 
-    Clone the repository:
-    bash
+Edit KdumpAI.py to update AI_API_KEY and AI_API_URL with your credentials, example for Azure OpenAI:
 
-git clone https://github.com/<your-username>/KdumpAI.git
-cd KdumpAI
-Configure AI API settings:
+`AI_API_KEY = "your-azure-openai-key"`
 
-    Edit KdumpAI.py to update AI_API_KEY and AI_API_URL with your credentials.
-    Example for Azure OpenAI:
-    python
+`AI_API_URL = "https://<your-endpoint>/openai/deployments/<deployment>/chat/completions?api-version=2024-02-15-preview"`
 
-    AI_API_KEY = "your-azure-openai-key"
-    AI_API_URL = "https://<your-endpoint>/openai/deployments/<deployment>/chat/completions?api-version=2024-02-15-preview"
+## Usage
+`#./KdumpAI.py --vmcore <vmcore_path> --vmlinux <vmlinux_path> [--output <output_html>]`
+![image](https://github.com/user-attachments/assets/3a7d736b-e81b-40a1-85b8-ed2fa4654268)
 
-Run the tool with the required vmcore and vmlinux files:
-bash
-sudo ./KdumpAI.py --vmcore /var/crash/127.0.0.1-2025-03-13-14:50:01/vmcore \
-                  --vmlinux /usr/lib/debug/lib/modules/$(uname -r)/vmlinux \
-                  [--output report.html]
+## Example
+`# ./KdumpAI.py --vmcore /var/crash/127.0.0.1-2025-03-13-14\:50\:01/vmcore --vmlinux /usr/lib/debug/lib/modules/5.14.0-503.26.1.el9_5.x86_64/vmlinux` 
 
-    --vmcore: Path to the kdump vmcore file.
-    --vmlinux: Path to the matching vmlinux file with debug symbols.
-    --output: Optional output HTML report path (default: kdump_ai_report.html).
+Azure OpenAI:
+![image](https://github.com/user-attachments/assets/18c0423b-3059-4172-bf41-cd7373883860)
 
-Support
-For questions or support, contact Frank Zhu at frz@microsoft.com, Microsoft Azure Linux Escalation Team.
+DeepSeek R1:
+![image](https://github.com/user-attachments/assets/dc93edd2-d99a-47ee-baf4-bfe46d991c90)
+
+
+
+## Analysis Report
+The script generates an HTML report (kdump_ai_report.html) containing detailed analysis results.
+
+Azure OpenAI:
+![image](https://github.com/user-attachments/assets/a34659d3-d20e-442e-b39e-93b558dea2b3)
+
+DeepSeek R1:
+![image](https://github.com/user-attachments/assets/c6f3c98e-08ad-44b6-bae1-667c09cf28ab)
+
+
+## Notes
+For now RHEL8 and RHEL9 are supported.
+
+Ensure the vmcore and vmlinux files match the crashed kernel version.
+
+The script requires root privileges to install dependencies and access vmcore files.
+
+## Support Contact
+
+For issues or questions, contact:
+
+Frank Zhu [frz@microsoft.com](mailto:frz@microsoft.com)
+
+Microsoft Azure Linux Escalation Team
