@@ -37,7 +37,7 @@ Edit KdumpAI.py to update AI_API_KEY and AI_API_URL with your credentials, examp
 
 ## Usage
 `#./KdumpAI.py --vmcore <vmcore_path> --vmlinux <vmlinux_path> [--output <output_html>]`
-![image](https://github.com/user-attachments/assets/3a7d736b-e81b-40a1-85b8-ed2fa4654268)
+![image](https://github.com/user-attachments/assets/253fc2d9-0797-4c47-92b6-c470b6852262)
 
 ## Example
 `# ./KdumpAI.py --vmcore /var/crash/127.0.0.1-2025-03-13-14\:50\:01/vmcore --vmlinux /usr/lib/debug/lib/modules/5.14.0-503.26.1.el9_5.x86_64/vmlinux` 
