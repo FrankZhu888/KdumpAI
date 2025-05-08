@@ -25,7 +25,7 @@ The tool collects critical system data using the `crash` utility, including syst
 
 ## Installation
 
-`$ git clone https://github.com/<your-username>/KdumpAI.git`
+`$ git clone https://github.com/FrankZhu888/KdumpAI.git`
 
 `$ cd KdumpAI`
 
